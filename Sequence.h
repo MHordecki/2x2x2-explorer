@@ -25,7 +25,7 @@ namespace Brutha
 			virtual int size() const;
 			virtual const Move &operator[](int index) const;
 			
-			virtual void push(Move &move);
+			virtual void push(Move move);
 			virtual const Move &pop();
 
 			//virtual ostream &operator<<(const ostream &);

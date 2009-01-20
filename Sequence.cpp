@@ -12,7 +12,7 @@ namespace Brutha
 		return moves[storage[index]];
 	}
 
-	void Sequence::push(Move &move)
+	void Sequence::push(Move move)
 	{
 		storage.push_back(move.index);
 	}

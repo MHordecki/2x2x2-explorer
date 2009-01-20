@@ -63,10 +63,8 @@ int main()
 	moves.push_back(MP(F, Fp));
 
 	//BFS foo(moves);
-	cout << "Banho" << endl;
-	DfsTraversal foo(moves);
-	foo.setLimit(12);
-	cout << "Pinho" << endl;
+	BfsTraversal foo(moves);
+	//foo.setLimit(12);
 
 	Cube st = cube_ideal();
 
@@ -103,9 +101,7 @@ int main()
 	//foo.set_limit(5);
 	
 	
-	cout << "Blut" << endl;
 	Examiner &x = foobar;
-	cout << "Blut" << endl;
 
 	foo.traverse(st, x);
 

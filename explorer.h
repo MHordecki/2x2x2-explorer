@@ -16,4 +16,6 @@
 #include "Examiner.h"
 
 #include "Dfs.h"
+#include "Bfs.h"
+
 #endif
