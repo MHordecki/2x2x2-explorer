@@ -1,6 +1,19 @@
 #ifndef _EXPLORER_H
 #define _EXPLORER_H
+
+/**
+ * 
+ * 2x2x2 Explorer
+ *
+ * by Michal Hordecki
+ *
+ */
+
 #include "222cube.h"
-#include "dfs.h"
-#include "bfs.h"
+
+#include "Traversal.h"
+#include "TraversalCallback.h"
+#include "Examiner.h"
+
+#include "Dfs.h"
 #endif

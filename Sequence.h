@@ -1,0 +1,37 @@
+#ifndef _SEQUENCE_H
+#define _SEQUENCE_H
+
+#include <string>
+#include <vector>
+
+#include "222cube.h"
+
+using std::vector;
+using std::string;
+
+namespace Brutha
+{
+	/**
+	 * Sequence represents a certain move sequence.
+	 */
+	class Sequence
+	{
+		protected:
+			vector<char> storage;
+			const vector<Move> &moves;
+		public:
+			Sequence(const vector<Move> &_moves): storage(20), moves(_moves) {}
+
+			virtual int size() const;
+			virtual const Move &operator[](int index) const;
+			
+			virtual void push(Move &move);
+			virtual const Move &pop();
+
+			//virtual ostream &operator<<(const ostream &);
+			
+			virtual string format() const;
+	};
+}
+
+#endif

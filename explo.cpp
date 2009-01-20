@@ -1,8 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <stack>
-#include <unordered_set>
-#include <set>
 using namespace std;
 
 #include "222cube.h"
@@ -11,24 +8,28 @@ using namespace std;
 typedef Cube (*MovePtr)(const Cube&);
 void strip(uint64_t);
 
-bool checker(const Cube &c, const vector<char> &seq, const vector<Move> &moves)
+using namespace Brutha;
+
+class FooBar: public Examiner
 {
-	if(c == cube_ideal())
+	public:
+	virtual bool operator()(TraversalCallback &cb)
 	{
-		cout << "FOUND " << seq.size() << endl;
-		strip(c.corners);
-		//cout << c.corners << endl << cube_ideal().corners << endl;
-		int num = seq.size();
-		for(int i = 0; i < num; i++)
+		Cube c = cb.getState();
+
+		if(c == cube_ideal())
 		{
-			printf("%s ", moves[seq[i]].name);
-		}
+			const Sequence &seq = cb.getSequence();
 
-		printf("\n");
-	} 
+			cout << "FOUND " << seq.size() << endl;
+			strip(c.corners);
+			cout << seq.format() << endl;
+		} 
 
-	return 0;
-}
+		return 0;
+	}
+} foobar;
+
 void strip(uint64_t x)
 {
 	int i = 0;
@@ -47,10 +48,10 @@ void strip(uint64_t x)
 	cout << endl;
 
 }
+
 #define MP make_pair
 int main()
 {
-	cube_init();
 	strip(cube_ideal().corners);
 	vector<pair<Move, Move> > moves;
 
@@ -58,16 +59,14 @@ int main()
 	moves.push_back(MP(R, Rp));
 	Move U = {moveU, "U"}, Up = {moveUp, "Up"};
 	moves.push_back(MP(U, Up));
-	//Move L = {moveL, "L"}, Lp = {moveLp, "Lp"};
-	//moves.push_back(MP(L, Lp));
-	//Move D = {moveD, "D"}, Dp = {moveDp, "Dp"};
-	//moves.push_back(MP(D, Dp));
 	Move F = {moveF, "F"}, Fp = {moveFp, "Fp"};
 	moves.push_back(MP(F, Fp));
 
-	BFS foo(moves);
-	//DFS foo(moves);
-	//foo.set_limit(12);
+	//BFS foo(moves);
+	cout << "Banho" << endl;
+	DfsTraversal foo(moves);
+	foo.setLimit(12);
+	cout << "Pinho" << endl;
 
 	Cube st = cube_ideal();
 
@@ -102,7 +101,12 @@ int main()
 	//st = moveU(st);
 
 	//foo.set_limit(5);
+	
+	
+	cout << "Blut" << endl;
+	Examiner &x = foobar;
+	cout << "Blut" << endl;
 
-	foo.execute(st, checker);
+	foo.traverse(st, x);
 
 }
