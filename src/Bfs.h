@@ -33,24 +33,8 @@ namespace Brutha
 			int allcount;
 
 		public:
-			BfsTraversal(vector<pair<Move, Move> > &_moves): V(4000000), cancellations(_moves.size() * 2, -1)
+			BfsTraversal(vector<pair<Move, Move> > &_moves): V(4000000), Traversal(_moves)
 			{
-				for(vector<pair<Move, Move> >::iterator it = _moves.begin(); it != _moves.end(); ++it)
-				{
-					if(it->first.fun)
-					{
-						this->moves.push_back(it->first);
-						this->moves.back().index = this->moves.size() - 1;
-					}
-					if(it->second.fun)
-					{
-						this->moves.push_back(it->second);
-						this->cancellations[this->moves.size()-1] = this->moves.size()-2;
-						this->cancellations[this->moves.size()-2] = this->moves.size()-1;
-						this->moves.back().index = this->moves.size() - 1;
-					}
-				}
-
 				paths.reserve(4000000);
 			}
 

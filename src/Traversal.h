@@ -4,6 +4,8 @@
 #include "222cube.h"
 #include "Examiner.h"
 
+#include <vector>
+
 namespace Brutha
 {
 	/**
@@ -21,7 +23,30 @@ namespace Brutha
 	{
 		protected:
 			bool verbosity;
+			std::vector<Move> moves;
+			std::vector<int> cancellations;
+
 		public:
+			Traversal(std::vector<std::pair<Move, Move> > &_moves): cancellations(_moves.size() * 2, -1)
+			{
+				for(std::vector<std::pair<Move, Move> >::iterator it = _moves.begin(); it != _moves.end(); ++it)
+				{
+					if(it->first.fun)
+					{
+						this->moves.push_back(it->first);
+						this->moves.back().index = this->moves.size() - 1;
+					}
+					if(it->second.fun)
+					{
+						this->moves.push_back(it->second);
+						this->cancellations[this->moves.size()-1] = this->moves.size()-2;
+						this->cancellations[this->moves.size()-2] = this->moves.size()-1;
+						this->moves.back().index = this->moves.size() - 1;
+					}
+				}
+
+			}
+
 			/**
 			 * Performs the traversal.
 			 *
