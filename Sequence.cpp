@@ -74,6 +74,10 @@ namespace Brutha
 
 		stringstream ss;
 
+		for(int i = 0; i < size(); i++)
+			ss << ' ' << operator[](i).name;
+		ss << "\n";
+
 		int count = 1;
 		int last = operator[](0).index;
 		bool space = false;
@@ -91,8 +95,10 @@ namespace Brutha
 				if(count == 1)
 				{
 					ss << moves[last].name;
-				} else
+				} else if(count == 2)
 					ss << moves[last].name[0] << 2;
+				else
+					ss << moves[last].name[0] << '_';
 
 				count = 1;
 				last = operator[](i).index;

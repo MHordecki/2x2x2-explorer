@@ -55,16 +55,16 @@ int main()
 	strip(cube_ideal().corners);
 	vector<pair<Move, Move> > moves;
 
-	Move R = {moveR, "R"}, Rp = {moveRp, "Rp"};
+	Move R = {moveR, "R"}, Rp = {moveRp, "R'"};
 	moves.push_back(MP(R, Rp));
-	Move U = {moveU, "U"}, Up = {moveUp, "Up"};
+	Move U = {moveU, "U"}, Up = {moveUp, "U'"};
 	moves.push_back(MP(U, Up));
-	Move F = {moveF, "F"}, Fp = {moveFp, "Fp"};
+	Move F = {moveF, "F"}, Fp = {moveFp, "F'"};
 	moves.push_back(MP(F, Fp));
 
 	//BFS foo(moves);
-	BfsTraversal foo(moves);
-	//foo.setLimit(12);
+	DfsTraversal foo(moves);
+	foo.setLimit(12);
 
 	Cube st = cube_ideal();
 

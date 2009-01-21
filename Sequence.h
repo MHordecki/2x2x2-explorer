@@ -20,7 +20,7 @@ namespace Brutha
 			vector<char> storage;
 			const vector<Move> &moves;
 		public:
-			Sequence(const vector<Move> &_moves): storage(20), moves(_moves) {}
+			Sequence(const vector<Move> &_moves): moves(_moves) {}
 
 			virtual int size() const;
 			virtual const Move &operator[](int index) const;
