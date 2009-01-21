@@ -39,6 +39,12 @@ namespace Brutha
 		storage.pop_back();
 		return m;
 	}
+	
+	void Sequence::clear()
+	{
+		storage.clear();
+	}
+
 
 	int Sequence::getQtmMetric() const
 	{
@@ -67,10 +73,6 @@ namespace Brutha
 		}
 
 		stringstream ss;
-
-		for(int i = 0; i < size(); i++)
-			ss << ' ' << operator[](i).name;
-		ss << "\n";
 
 		int count = 1;
 		int last = operator[](0).index;

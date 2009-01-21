@@ -27,6 +27,7 @@ namespace Brutha
 			
 			virtual void push(Move move);
 			virtual const Move &pop();
+			virtual void clear();
 
 			//virtual ostream &operator<<(const ostream &);
 			
