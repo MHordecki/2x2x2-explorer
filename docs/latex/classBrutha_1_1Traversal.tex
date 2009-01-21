@@ -1,0 +1,56 @@
+\hypertarget{classBrutha_1_1Traversal}{
+\section{Brutha::Traversal Class Reference}
+\label{classBrutha_1_1Traversal}\index{Brutha::Traversal@{Brutha::Traversal}}
+}
+An abstract class for \hyperlink{classBrutha_1_1Traversal}{Traversal} objects.  
+
+
+{\tt \#include $<$Traversal.h$>$}
+
+Inheritance diagram for Brutha::Traversal:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=143pt]{classBrutha_1_1Traversal__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{CompactItemize}
+\item 
+virtual void \hyperlink{classBrutha_1_1Traversal_67ab6c006a71670a85bf44e402929d01}{traverse} (Cube state, \hyperlink{classBrutha_1_1Examiner}{Examiner} \&examiner)=0
+\begin{CompactList}\small\item\em Performs the traversal. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+An abstract class for \hyperlink{classBrutha_1_1Traversal}{Traversal} objects. 
+
+These objects traverse through the whole 2x2x2 state universe using a defined technique.
+
+Each of these states is then encapsulated in \hyperlink{classBrutha_1_1TraversalCallback}{TraversalCallback} and passed to \hyperlink{classBrutha_1_1Examiner}{Examiner} object, which is user-provided.
+
+\begin{Desc}
+\item[See also:]\hyperlink{classBrutha_1_1TraversalCallback}{TraversalCallback} 
+
+\hyperlink{classBrutha_1_1Examiner}{Examiner} \end{Desc}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classBrutha_1_1Traversal_67ab6c006a71670a85bf44e402929d01}{
+\index{Brutha::Traversal@{Brutha::Traversal}!traverse@{traverse}}
+\index{traverse@{traverse}!Brutha::Traversal@{Brutha::Traversal}}
+\subsubsection[{traverse}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Brutha::Traversal::traverse (Cube {\em state}, \/  {\bf Examiner} \& {\em examiner})\hspace{0.3cm}{\tt  \mbox{[}pure virtual\mbox{]}}}}
+\label{classBrutha_1_1Traversal_67ab6c006a71670a85bf44e402929d01}
+
+
+Performs the traversal. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em state}]beginning state. \item[{\em examiner}]user-provided object which examines each visited state. \end{description}
+\end{Desc}
+
+
+The documentation for this class was generated from the following file:\begin{CompactItemize}
+\item 
+src/Traversal.h\end{CompactItemize}

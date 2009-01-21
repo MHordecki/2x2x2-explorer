@@ -1,0 +1,109 @@
+\hypertarget{classBrutha_1_1Sequence}{
+\section{Brutha::Sequence Class Reference}
+\label{classBrutha_1_1Sequence}\index{Brutha::Sequence@{Brutha::Sequence}}
+}
+\hyperlink{classBrutha_1_1Sequence}{Sequence} represents a certain move sequence.  
+
+
+{\tt \#include $<$Sequence.h$>$}
+
+Inheritance diagram for Brutha::Sequence:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=92pt]{classBrutha_1_1Sequence__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{CompactItemize}
+\item 
+\hypertarget{classBrutha_1_1Sequence_642c0d4d05d18ece53275f58b7120a18}{
+\textbf{Sequence} (const vector$<$ Move $>$ \&\_\-moves)}
+\label{classBrutha_1_1Sequence_642c0d4d05d18ece53275f58b7120a18}
+
+\item 
+virtual int \hyperlink{classBrutha_1_1Sequence_9e2aa4c6db6063aff5247f2cd5e7b7df}{size} () const 
+\begin{CompactList}\small\item\em Returns a size of the underlying storage. \item\end{CompactList}\item 
+\hypertarget{classBrutha_1_1Sequence_830bc00f3067f33664f91d519eeb80f2}{
+virtual const Move \& \hyperlink{classBrutha_1_1Sequence_830bc00f3067f33664f91d519eeb80f2}{operator\mbox{[}$\,$\mbox{]}} (int index) const }
+\label{classBrutha_1_1Sequence_830bc00f3067f33664f91d519eeb80f2}
+
+\begin{CompactList}\small\item\em Returns a Move object at the given position. \item\end{CompactList}\item 
+\hypertarget{classBrutha_1_1Sequence_33967587aa561719e322594d2247f63f}{
+virtual void \textbf{push} (Move move)}
+\label{classBrutha_1_1Sequence_33967587aa561719e322594d2247f63f}
+
+\item 
+\hypertarget{classBrutha_1_1Sequence_5e86148bf39752cef9054ecd7354d9d0}{
+virtual const Move \& \textbf{pop} ()}
+\label{classBrutha_1_1Sequence_5e86148bf39752cef9054ecd7354d9d0}
+
+\item 
+\hypertarget{classBrutha_1_1Sequence_599b970cf400ee90b250ea9b578af8f4}{
+virtual void \textbf{clear} ()}
+\label{classBrutha_1_1Sequence_599b970cf400ee90b250ea9b578af8f4}
+
+\item 
+\hypertarget{classBrutha_1_1Sequence_43951830faef8f02b8eff4b0eaabd0b8}{
+virtual int \textbf{getQtmMetric} () const }
+\label{classBrutha_1_1Sequence_43951830faef8f02b8eff4b0eaabd0b8}
+
+\item 
+\hypertarget{classBrutha_1_1Sequence_3e2ec4f84a589c4ac3cfb2d5810b1a0b}{
+virtual int \textbf{getHtmMetric} () const }
+\label{classBrutha_1_1Sequence_3e2ec4f84a589c4ac3cfb2d5810b1a0b}
+
+\item 
+virtual string \hyperlink{classBrutha_1_1Sequence_a33a3b258707feb3b35e94b780b22ee4}{format} () const 
+\begin{CompactList}\small\item\em Formats a \hyperlink{classBrutha_1_1Sequence}{Sequence} to a human-readable form. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Protected Attributes}
+\begin{CompactItemize}
+\item 
+\hypertarget{classBrutha_1_1Sequence_e462d084fb3674cd8667cef4fdd9d7d8}{
+vector$<$ char $>$ \textbf{storage}}
+\label{classBrutha_1_1Sequence_e462d084fb3674cd8667cef4fdd9d7d8}
+
+\item 
+\hypertarget{classBrutha_1_1Sequence_1a72ab6f5624bebb3ec99ff463f7eccd}{
+const vector$<$ Move $>$ \& \textbf{moves}}
+\label{classBrutha_1_1Sequence_1a72ab6f5624bebb3ec99ff463f7eccd}
+
+\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classBrutha_1_1Sequence}{Sequence} represents a certain move sequence. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classBrutha_1_1Sequence_a33a3b258707feb3b35e94b780b22ee4}{
+\index{Brutha::Sequence@{Brutha::Sequence}!format@{format}}
+\index{format@{format}!Brutha::Sequence@{Brutha::Sequence}}
+\subsubsection[{format}]{\setlength{\rightskip}{0pt plus 5cm}string Brutha::Sequence::format () const\hspace{0.3cm}{\tt  \mbox{[}virtual\mbox{]}}}}
+\label{classBrutha_1_1Sequence_a33a3b258707feb3b35e94b780b22ee4}
+
+
+Formats a \hyperlink{classBrutha_1_1Sequence}{Sequence} to a human-readable form. 
+
+\begin{Desc}
+\item[Returns:]string representation. \end{Desc}
+\hypertarget{classBrutha_1_1Sequence_9e2aa4c6db6063aff5247f2cd5e7b7df}{
+\index{Brutha::Sequence@{Brutha::Sequence}!size@{size}}
+\index{size@{size}!Brutha::Sequence@{Brutha::Sequence}}
+\subsubsection[{size}]{\setlength{\rightskip}{0pt plus 5cm}int Brutha::Sequence::size () const\hspace{0.3cm}{\tt  \mbox{[}virtual\mbox{]}}}}
+\label{classBrutha_1_1Sequence_9e2aa4c6db6063aff5247f2cd5e7b7df}
+
+
+Returns a size of the underlying storage. 
+
+For more apropriate measure of the number of moves in the sequence, use getQtmMetric and getHtmMetric.
+
+\begin{Desc}
+\item[See also:]getHtmMetric 
+
+getQtmMetric \end{Desc}
+
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+src/Sequence.h\item 
+src/Sequence.cpp\end{CompactItemize}

@@ -1,0 +1,73 @@
+\hypertarget{classBrutha_1_1TraversalCallback}{
+\section{Brutha::TraversalCallback Class Reference}
+\label{classBrutha_1_1TraversalCallback}\index{Brutha::TraversalCallback@{Brutha::TraversalCallback}}
+}
+An abstract class for information chunks that are given to \hyperlink{classBrutha_1_1Examiner}{Examiner} objects by TraveRsal objects.  
+
+
+{\tt \#include $<$TraversalCallback.h$>$}
+
+Inheritance diagram for Brutha::TraversalCallback:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=183pt]{classBrutha_1_1TraversalCallback__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{CompactItemize}
+\item 
+virtual Cube \hyperlink{classBrutha_1_1TraversalCallback_c037795e35fc6b1a2c65cb1e0e976356}{getState} ()=0
+\begin{CompactList}\small\item\em Returns current cube state.A. \item\end{CompactList}\item 
+virtual const \hyperlink{classBrutha_1_1Sequence}{Sequence} \& \hyperlink{classBrutha_1_1TraversalCallback_8946d090513db014bbf7b542dc70866c}{getSequence} ()=0
+\begin{CompactList}\small\item\em Returns a sequence of moves that leads from the traversal beginning state to the current one. \item\end{CompactList}\item 
+\hypertarget{classBrutha_1_1TraversalCallback_b0c7e8d859f10ad580c805e93555443d}{
+virtual const Move \& \textbf{getParentMove} ()=0}
+\label{classBrutha_1_1TraversalCallback_b0c7e8d859f10ad580c805e93555443d}
+
+\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+An abstract class for information chunks that are given to \hyperlink{classBrutha_1_1Examiner}{Examiner} objects by TraveRsal objects. 
+
+\begin{Desc}
+\item[See also:]\hyperlink{classBrutha_1_1Traversal}{Traversal} 
+
+\hyperlink{classBrutha_1_1Examiner}{Examiner} \end{Desc}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classBrutha_1_1TraversalCallback_8946d090513db014bbf7b542dc70866c}{
+\index{Brutha::TraversalCallback@{Brutha::TraversalCallback}!getSequence@{getSequence}}
+\index{getSequence@{getSequence}!Brutha::TraversalCallback@{Brutha::TraversalCallback}}
+\subsubsection[{getSequence}]{\setlength{\rightskip}{0pt plus 5cm}virtual const {\bf Sequence}\& Brutha::TraversalCallback::getSequence ()\hspace{0.3cm}{\tt  \mbox{[}pure virtual\mbox{]}}}}
+\label{classBrutha_1_1TraversalCallback_8946d090513db014bbf7b542dc70866c}
+
+
+Returns a sequence of moves that leads from the traversal beginning state to the current one. 
+
+\begin{Desc}
+\item[Note:]This operation can be time consuming, depending on the travelsal technique. Use it sparingly.\end{Desc}
+\begin{Desc}
+\item[Returns:]a \hyperlink{classBrutha_1_1Sequence}{Sequence} object.\end{Desc}
+\begin{Desc}
+\item[See also:]\hyperlink{classBrutha_1_1TraversalCallback_c037795e35fc6b1a2c65cb1e0e976356}{getState} 
+
+\hyperlink{classBrutha_1_1Sequence}{Sequence} \end{Desc}
+\hypertarget{classBrutha_1_1TraversalCallback_c037795e35fc6b1a2c65cb1e0e976356}{
+\index{Brutha::TraversalCallback@{Brutha::TraversalCallback}!getState@{getState}}
+\index{getState@{getState}!Brutha::TraversalCallback@{Brutha::TraversalCallback}}
+\subsubsection[{getState}]{\setlength{\rightskip}{0pt plus 5cm}virtual Cube Brutha::TraversalCallback::getState ()\hspace{0.3cm}{\tt  \mbox{[}pure virtual\mbox{]}}}}
+\label{classBrutha_1_1TraversalCallback_c037795e35fc6b1a2c65cb1e0e976356}
+
+
+Returns current cube state.A. 
+
+\begin{Desc}
+\item[Returns:]Puzzle state. \end{Desc}
+
+
+The documentation for this class was generated from the following file:\begin{CompactItemize}
+\item 
+src/TraversalCallback.h\end{CompactItemize}
