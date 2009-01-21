@@ -38,9 +38,8 @@ namespace Brutha
 
 			if(count%100000 == 0) std::cout << count << " / " << allcount << std::endl;
 
-			/* Sequence reconstruction */
+			BfsTraversalCallback foo(x, moves, paths, paths.size() - 1);
 
-			BfsTraversalCallback foo(state, moves, paths, paths.size() - 1);
 			if(examiner(foo)) continue;
 
 			for(int i = 0; i < move_num; i++)

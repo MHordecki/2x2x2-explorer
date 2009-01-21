@@ -30,6 +30,8 @@ namespace Brutha
 
 			//virtual ostream &operator<<(const ostream &);
 			
+			virtual int getQtmMetric() const;
+			virtual int getHtmMetric() const;
 			virtual string format() const;
 	};
 }

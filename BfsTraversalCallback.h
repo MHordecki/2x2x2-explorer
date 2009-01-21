@@ -9,7 +9,7 @@ using std::pair;
 #include "222cube.h"
 
 #include "TraversalCallback.h"
-#include "Sequence.h"
+#include "ReverseSequence.h"
 
 namespace Brutha
 {
@@ -20,7 +20,7 @@ namespace Brutha
 			const vector<Move> &moves;
 			Cube state;
 			int index;
-			Sequence seq;
+			ReverseSequence seq;
 			bool seq_processed;
 
 		public:
