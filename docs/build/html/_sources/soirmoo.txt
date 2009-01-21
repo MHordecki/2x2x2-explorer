@@ -1,0 +1,33 @@
+:mod:`soirmoo` --- The Grand Telltale of The Soirmoo
+=====================================================
+
+.. module:: soirmoo
+
+Hello world!
+
+Foo Bar!
+
+Espinoza!
+
+.. class:: Papucie
+
+   foo!
+
+.. cfunction:: foobar(hello[, world])
+
+   Hello world! ``Blablor!``
+
+   :param hello: Foo you, curiousity!
+
+.. function:: foobar(hello[, world])
+
+   Hello world! ``Blablor!``
+
+   :param hello: Foo you, curiousity!
+
+.. method:: Papucie.foobar(int hello[, babikov<char> world])
+
+   Hello world! ``Blablor!``
+
+   :param hello: Foo you, curiousity!
+
