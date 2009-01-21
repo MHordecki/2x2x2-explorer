@@ -1,6 +1,6 @@
-**********************************
-Introduction to 2x2x2 Explorer
-**********************************
+**************
+Fundamentals
+**************
 
 :Author: Michal Hordecki
 :Release: |release|
@@ -22,6 +22,10 @@ This document will bring you the fundamentals of the Explorer.
 Cube representation
 ---------------------
 
+============
+Cube state
+============
+
 First thing to learn is how is a cube state represented in a memory.
 
 2x2x2 Explorer favors performance over beauty. Instead of using more human-friendly representation,
@@ -42,7 +46,7 @@ Such chunk can be then stored in **5 bits** (3 bits for cubie, 2 bits for orient
 64-bit long long due to alignment). First position is stored at position 0, second at 5, and so on
 (remember, we're talking about bit positions there).
 
-Order in which positions are represented (excerpt from ``222cube.h``):::
+Order in which positions are represented (excerpt from ``222cube.h``)::
 
   //Corner offsets
   #define UFR 0
@@ -55,7 +59,7 @@ Order in which positions are represented (excerpt from ``222cube.h``):::
   #define DLB 30
   #define DBR 35
 
-First two bits of each chunk is used for orientation, remaining three - for cubie index:::
+First two bits of each chunk is used for orientation, remaining three - for cubie index::
 
   // Cubies
   #define CUFR 0
@@ -81,10 +85,51 @@ as ``int64_t`` packed in a C structure.
 
   Function :func:`Explorer.strip`
     Prints cube state in human-readable format.
+
+  Function :func:`Explorer.cube_ideal`
+    In order to get a representation for the solved state.
   
   :ref:`idioms-bits`
     Tips and tricks when operating with bit values.
 
------
-Foo
------
+=======
+Moves
+=======
+
+In order to change the cube state, some moves must be applied. 2x2x2 Explorer defines them as follows::
+
+  Cube moveR(const Cube &state);
+  Cube moveRp(const Cube &state);
+  
+  Cube moveU(const Cube &state);
+  Cube moveUp(const Cube &state);
+  
+  Cube moveF(const Cube &state);
+  Cube moveFp(const Cube &state);
+  
+  Cube moveL(const Cube &state);
+  Cube moveLp(const Cube &state);
+  
+  Cube moveD(const Cube &state);
+  Cube moveDp(const Cube &state);
+  
+  Cube moveB(const Cube &state);
+  Cube moveBp(const Cube &state);
+
+As you can see, move methods don't modify given cube state, but generate a new one instead.
+
+In practice, only {R, Rp, U, Up, F, Fp} are used. Why?
+
+Pocket Cube has no fixed centers. There are no 'fixed' points that other pieces can be compared with.
+3x3x3 Cube, for example, has six fixed pieces - the centers (center stickers on each side). Such move
+sequence as *R L'* yields therefore a different cube state.
+
+In 2x2x2, hovewer, *R L'* does not change the state. It's still the same. 
+
+Given these circumstances, 2x2x2 Explorer 'artificially' creates such a 'fixed' point - the DBL cubie.
+Note that you can't move this cubie with moves only from {R, Rp, U, Up, F, Fp}. 
+
+Though not obvious at the first glance, every 2x2x2 case can be solved using only these moves, provided
+the DBL cubie is in it's place, correctly oriented.
+
+

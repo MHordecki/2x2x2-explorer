@@ -18,6 +18,7 @@ situation in general.
    :maxdepth: 2
 
    intro
+   traversal
    tips
 
 
