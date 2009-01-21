@@ -19,6 +19,8 @@ namespace Brutha
 	 */
 	class Traversal
 	{
+		protected:
+			bool verbosity;
 		public:
 			/**
 			 * Performs the traversal.
@@ -27,6 +29,7 @@ namespace Brutha
 			 * @param examiner user-provided object which examines each visited state.
 			 */
 			virtual void traverse(Cube state, Examiner &examiner) = 0;
+			virtual void setVerbosity(bool);
 	};
 }
 

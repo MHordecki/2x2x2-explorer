@@ -25,7 +25,7 @@ namespace Brutha
 			void search(Examiner &examiner, Cube state, Sequence &seq, int, int, int, int);
 
 		public:
-			DfsTraversal(vector<pair<Move, Move> > &_moves): cancellations(_moves.size() * 2, -1), limit(0)
+			DfsTraversal(vector<pair<Move, Move> > &_moves, int _limit = 0): cancellations(_moves.size() * 2, -1), limit(_limit)
 			{
 				for(vector<pair<Move, Move> >::iterator it = _moves.begin(); it != _moves.end(); ++it)
 				{

@@ -33,8 +33,9 @@ namespace Brutha
 		int move_num = this->moves.size();
 
 		++counter;
-
-		if(counter%100000==0) std::cout << counter << std::endl;
+		
+		if(verbosity)
+			if(counter%100000==0) std::cout << counter << std::endl;
 
 		for(int i = 0; i < move_num; i++)
 		{

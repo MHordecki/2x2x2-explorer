@@ -36,7 +36,8 @@ namespace Brutha
 			paths.push_back(previous);
 			++count;
 
-			if(count%100000 == 0) std::cout << count << " / " << allcount << std::endl;
+			if(verbosity)
+				if(count%100000 == 0) std::cout << count << " / " << allcount << std::endl;
 
 			BfsTraversalCallback foo(x, moves, paths, paths.size() - 1);
 
