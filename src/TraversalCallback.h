@@ -6,7 +6,7 @@
 #include "222cube.h"
 #include "Sequence.h"
 
-namespace Brutha
+namespace Explorer
 {
 	/**
 	 * An abstract class for information chunks that are given to

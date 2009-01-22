@@ -5,7 +5,7 @@
 using namespace std;
 
 #include "Sequence.h"
-namespace Brutha
+namespace Explorer
 {
 	/**
 	 * Returns a size of the underlying storage.

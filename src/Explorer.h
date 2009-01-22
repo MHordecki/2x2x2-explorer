@@ -11,10 +11,13 @@
 
 #include "222cube.h"
 
+#include "Core.h"
+
 #include "Traversal.h"
 #include "TraversalCallback.h"
 #include "Examiner.h"
 
+#include "Interpreters.h"
 #include "Dfs.h"
 #include "Bfs.h"
 

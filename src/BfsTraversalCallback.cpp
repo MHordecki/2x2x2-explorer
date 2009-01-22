@@ -2,7 +2,7 @@
 #include "BfsTraversalCallback.h"
 #include <iostream>
 using namespace std;
-namespace Brutha
+namespace Explorer
 {
 	Cube BfsTraversalCallback::getState()
 	{

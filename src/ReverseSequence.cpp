@@ -5,7 +5,7 @@
 using namespace std;
 
 #include "ReverseSequence.h"
-namespace Brutha
+namespace Explorer
 {
 	const Move &ReverseSequence::operator[](int index) const
 	{

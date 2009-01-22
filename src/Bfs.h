@@ -16,14 +16,11 @@ using std::vector;
 using std::make_pair;
 using std::pair;
 
-namespace Brutha
+namespace Explorer
 {
 	class BfsTraversal: public Traversal
 	{
 		protected:
-
-			vector<Move> moves;
-			vector<int> cancellations;
 
 			queue<pair<uint64_t, pair<int, char> > > Q;
 			unordered_set<uint64_t> V;
@@ -33,7 +30,7 @@ namespace Brutha
 			int allcount;
 
 		public:
-			BfsTraversal(vector<pair<Move, Move> > &_moves): V(4000000), Traversal(_moves)
+			BfsTraversal(vector<pair<Move, Move> > &_moves):  Traversal(_moves), V(4000000)
 			{
 				paths.reserve(4000000);
 			}

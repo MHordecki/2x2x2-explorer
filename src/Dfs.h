@@ -11,7 +11,7 @@ using std::pair;
 #include "DfsTraversalCallback.h"
 #include "Sequence.h"
 
-namespace Brutha
+namespace Explorer
 {
 	class DfsTraversal : public Traversal
 	{

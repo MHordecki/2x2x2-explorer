@@ -11,7 +11,7 @@ using std::pair;
 #include "TraversalCallback.h"
 #include "ReverseSequence.h"
 
-namespace Brutha
+namespace Explorer
 {
 	class BfsTraversalCallback: public TraversalCallback
 	{

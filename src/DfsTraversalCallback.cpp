@@ -1,7 +1,7 @@
 
 #include "DfsTraversalCallback.h"
 
-namespace Brutha
+namespace Explorer
 {
 	Cube DfsTraversalCallback::getState()
 	{

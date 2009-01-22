@@ -3,7 +3,7 @@
 
 #include "Dfs.h"
 
-namespace Brutha
+namespace Explorer
 {
 	int DfsTraversal::getLimit() 
 	{

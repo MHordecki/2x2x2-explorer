@@ -1,7 +1,7 @@
 
 #include "Traversal.h"
 
-namespace Brutha
+namespace Explorer
 {
 	void Traversal::setVerbosity(bool _verbosity)
 	{

@@ -8,7 +8,7 @@
  *
  * 2x2x2 cube representation
  *
- * for Brutha
+ * for Explorer
  *
  * by Michal Hordecki
  *
@@ -74,6 +74,11 @@ struct Move
 #define CDLB 6
 #define CDBR 7
 
+//Orientations
+#define orientUD 0
+#define orientFB 1
+#define orientRL 2
+
 // Helper functions
 
 //Trigger bit
@@ -88,6 +93,9 @@ struct Move
 #define rOC0(x, y) (!(rOC1((x), (y)) | rOC2((x), (y))))
 #define rOC(x, y) (((x) & (3<<(y)))>>(y))
 
+// Some stuff
+
+#define corner_compose(cubie, orient) ((uint64_t) (((uint64_t)(cubie) << 2) | (orient)))
 
 Cube cube_ideal();
 

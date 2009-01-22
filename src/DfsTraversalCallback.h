@@ -6,7 +6,7 @@
 #include "TraversalCallback.h"
 #include "Sequence.h"
 
-namespace Brutha
+namespace Explorer
 {
 	class DfsTraversalCallback: public TraversalCallback
 	{

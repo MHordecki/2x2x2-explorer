@@ -3,7 +3,7 @@
 
 #include "TraversalCallback.h"
 
-namespace Brutha
+namespace Explorer
 {
 	/**
 	 * An abstract class from which each examiner object must inherit.

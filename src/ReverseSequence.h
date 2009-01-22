@@ -10,7 +10,7 @@
 using std::vector;
 using std::string;
 
-namespace Brutha
+namespace Explorer
 {
 	/**
 	 * Some of traversal techniques create sequences

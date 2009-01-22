@@ -9,7 +9,7 @@
 using std::vector;
 using std::string;
 
-namespace Brutha
+namespace Explorer
 {
 	/**
 	 * Sequence represents a certain move sequence.

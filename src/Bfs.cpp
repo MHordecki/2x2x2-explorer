@@ -3,7 +3,7 @@
 
 #include "Bfs.h"
 
-namespace Brutha
+namespace Explorer
 {
 	void BfsTraversal::traverse(Cube state, Examiner &examiner)
 	{
@@ -50,7 +50,8 @@ namespace Brutha
 			}
 		}
 
-		std::cout << "TOTAL: " << V.size() << std::endl;
+		if(verbosity)
+			std::cout << "TOTAL: " << V.size() << std::endl;
 	}
 		
 }

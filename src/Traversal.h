@@ -6,7 +6,7 @@
 
 #include <vector>
 
-namespace Brutha
+namespace Explorer
 {
 	/**
 	 * An abstract class for Traversal objects.

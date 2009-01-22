@@ -8,7 +8,7 @@
  *
  * 2x2x2 cube representation
  *
- * for Brutha
+ * for Explorer
  *
  * by Michal Hordecki
  *
