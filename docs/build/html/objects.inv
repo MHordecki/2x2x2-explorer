@@ -1,9 +1,10 @@
 # Sphinx inventory version 1
 # Project: 2x2x2 Explorer
 # Version: 0.3
+Explorer mod explorer.html
 Examiner class traversal.html
 Sequence class traversal.html
-Move class intro.html
+Move class fundamentals.html
 Traversal class traversal.html
 DfsTraversal.DfsTraversal method traversal.html
 TraversalCallback class traversal.html

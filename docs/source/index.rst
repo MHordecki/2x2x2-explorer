@@ -18,6 +18,9 @@ situation in general.
    :maxdepth: 3
 
    intro
+   fundamentals
    traversal
+
+   explorer
 
 
