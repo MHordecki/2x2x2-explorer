@@ -59,11 +59,25 @@
 </tr>
 </tbody>
 </table>
+<p><strong>Disclaimer:</strong> In this manual, only methods that are meant to be used by end-user
+are documented. For a exhaustive list (when you&#8217;re a developer, for example), refer to
+the source (which should be documented rather well).</p>
 <div class="contents topic" id="contents">
 <p class="topic-title first">Contents</p>
 <ul class="simple">
 <li><a class="reference internal" href="#traversal" id="id1">Traversal</a><ul>
-<li><a class="reference internal" href="#traversal-objects" id="id2">Traversal objects</a></li>
+<li><a class="reference internal" href="#traversal-objects" id="id2">Traversal objects</a><ul>
+<li><a class="reference internal" href="#traversal-class" id="id3">Traversal class</a></li>
+<li><a class="reference internal" href="#examiner-class" id="id4">Examiner class</a></li>
+<li><a class="reference internal" href="#traversalcallback-class" id="id5">TraversalCallback class</a></li>
+<li><a class="reference internal" href="#sequence-class" id="id6">Sequence class</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#stock-traversal-implementations" id="id7">Stock traversal implementations</a><ul>
+<li><a class="reference internal" href="#dfstraversal" id="id8">DfsTraversal</a></li>
+<li><a class="reference internal" href="#bfstraversal" id="id9">BfsTraversal</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -75,6 +89,8 @@
 <p>There are approximately 3,5 million of possible 2x2x2 situations. This space can be then processed
 in a reasonable time. 2x2x2 Explorer provides so-called traversal objects to visit them in certain
 order.</p>
+<div class="section" id="traversal-class">
+<h3><a class="toc-backref" href="#id3">Traversal class<a class="headerlink" href="#traversal-class" title="Permalink to this headline">¶</a></a></h3>
 <dl class="class">
 <dt id="Traversal">
 <!--[Traversal]-->class <tt class="descname">Traversal</tt><a class="headerlink" href="#Traversal" title="Permalink to this definition">¶</a></dt>
@@ -87,7 +103,7 @@ of the traversal method are left to the inheriting classes.</p>
 <dd><p>This is the main method of traversal objects. It starts the traversal, beginning
 with the state provided by argument <em>state</em>. Some traversal implementations may ignore
 it, some may not.</p>
-<p>Second parameter is an user-provided <tt class="xref docutils literal"><span class="pre">Examiner</span></tt> object. <tt class="xref docutils literal"><span class="pre">Examiner</span></tt> is an
+<p>Second parameter is a user-provided <a title="Examiner" class="reference internal" href="#Examiner"><tt class="xref docutils literal"><span class="pre">Examiner</span></tt></a> object. <a title="Examiner" class="reference internal" href="#Examiner"><tt class="xref docutils literal"><span class="pre">Examiner</span></tt></a> is an
 another abstract base class, acting as a functor object.</p>
 </dd></dl>
 
@@ -100,6 +116,135 @@ output.</dd></dl>
 </dd></dl>
 
 </div>
+<div class="section" id="examiner-class">
+<h3><a class="toc-backref" href="#id4">Examiner class<a class="headerlink" href="#examiner-class" title="Permalink to this headline">¶</a></a></h3>
+<dl class="class">
+<dt id="Examiner">
+<!--[Examiner]-->class <tt class="descname">Examiner</tt><a class="headerlink" href="#Examiner" title="Permalink to this definition">¶</a></dt>
+<dd><p>Examiner is the next abstract base class, this time user-provided. It acts as a functor
+object.</p>
+<dl class="method">
+<dt>
+<tt class="descname">virtual bool operator()(TraversalCallback &amp;) = 0;</tt></dt>
+<dd>This is the method that Examiner implementations should expose. It will be called
+in every iteration of traversal process, i.e. for every state visited. It can communicate
+with it&#8217;s caller through a TraversalCallback object (which is another abstract base class).</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="traversalcallback-class">
+<h3><a class="toc-backref" href="#id5">TraversalCallback class<a class="headerlink" href="#traversalcallback-class" title="Permalink to this headline">¶</a></a></h3>
+<dl class="class">
+<dt id="TraversalCallback">
+<!--[TraversalCallback]-->class <tt class="descname">TraversalCallback</tt><a class="headerlink" href="#TraversalCallback" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt>
+<tt class="descname">virtual Cube getState() = 0;</tt></dt>
+<dd>Returns a state being currently visited.</dd></dl>
+
+<dl class="method">
+<dt>
+<tt class="descname">virtual const Sequence &amp;getSequence() = 0;</tt></dt>
+<dd><p>Returns a <a title="Sequence" class="reference internal" href="#Sequence"><tt class="xref docutils literal"><span class="pre">Sequence</span></tt></a> object, which can be used to determine move sequence from the beginning state
+of the traversal method.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><tt class="xref docutils literal"><span class="pre">getSequence()</span></tt> can be quite expensive operation. Use it sparingly, as calling it for
+every visited state can considerably slow your program.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<tt class="descname">virtual const Move &amp;getParentMove() = 0;</tt></dt>
+<dd>More of a raw power, it returns a <tt class="xref docutils literal"><span class="pre">Move</span></tt> from which the current state was reached.</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="sequence-class">
+<h3><a class="toc-backref" href="#id6">Sequence class<a class="headerlink" href="#sequence-class" title="Permalink to this headline">¶</a></a></h3>
+<dl class="class">
+<dt id="Sequence">
+<!--[Sequence]-->class <tt class="descname">Sequence</tt><a class="headerlink" href="#Sequence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sequence class encapsulates a move sequence.</p>
+<dl class="method">
+<dt>
+<tt class="descname">virtual int size() const;</tt></dt>
+<dd><p>Pretty self-explanatory.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This should not be used to determine the length of the actual algorithm that
+is encapsulated by Sequence. Use <tt class="xref docutils literal"><span class="pre">getQtmMetric()</span></tt> for that, instead.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<tt class="descname">virtual const Move &amp;operator[](int index) const;</tt></dt>
+<dd>Also pretty self-explanatory.</dd></dl>
+
+<dl class="method">
+<dt>
+<tt class="descname">virtual int getQtmMetric() const;</tt></dt>
+<dd>Returns an algorithm length in QTM(each move counts as one) metric.</dd></dl>
+
+<dl class="method">
+<dt>
+<tt class="descname">virtual int getHtmMetric() const;</tt></dt>
+<dd>Returns an algorithm length in HTM(double moves also count as one) metric.</dd></dl>
+
+<dl class="method">
+<dt>
+<tt class="descname">virtual std::string format() const;</tt></dt>
+<dd>Returns a human-readable representation of the algorithm.</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="stock-traversal-implementations">
+<h2><a class="toc-backref" href="#id7">Stock traversal implementations<a class="headerlink" href="#stock-traversal-implementations" title="Permalink to this headline">¶</a></a></h2>
+<p>As for now, 2x2x2 Explorer provides two traversal methods (of course you can write
+your own, too!).</p>
+<div class="section" id="dfstraversal">
+<h3><a class="toc-backref" href="#id8">DfsTraversal<a class="headerlink" href="#dfstraversal" title="Permalink to this headline">¶</a></a></h3>
+<p>DfsTraversal uses a well-known DFS (Depth-First Search) algorithm to traverse through 2x2x2 states.</p>
+<p>It&#8217;s a lot slower than it&#8217;s counterpart, <tt class="xref docutils literal"><span class="pre">BfsTraversal</span></tt>, but it visits states multiple times,
+each time with a <em>different</em> Sequence leading to it. It can be therefore used to generate
+many algorithms solving the same state.</p>
+<p>DfsTraversal needs one parameter to function - the recursion limit. It specifies how deep the
+algorithm will search, and it effectively means the maximal length of sequences returned.</p>
+<p><em>declared in file Dfs.h</em></p>
+<dl class="class">
+<dt id="DfsTraversal">
+<!--[DfsTraversal]-->class <tt class="descname">DfsTraversal</tt><a class="headerlink" href="#DfsTraversal" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="DfsTraversal.DfsTraversal">
+<!--[DfsTraversal.DfsTraversal]--><tt class="descname">DfsTraversal</tt><big>(</big><em>vector&lt;pair&lt;Move</em>, <em>Move&gt; &gt; &amp;moves</em><span class="optional">[</span>, <em>int limit = 0</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#DfsTraversal.DfsTraversal" title="Permalink to this definition">¶</a></dt>
+<dd>This is a standard <tt class="xref docutils literal"><span class="pre">Traversal.Traversal()</span></tt> constructor with one optional parameter added (the recursion limit).</dd></dl>
+
+<dl class="method">
+<dt>
+<tt class="descname">virtual int getLimit();</tt></dt>
+<dd>Returns the recursion limit.</dd></dl>
+
+<dl class="method">
+<dt>
+<tt class="descname">virtual void setLimit(int limit);</tt></dt>
+<dd>Sets the recursion limit.</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="bfstraversal">
+<h3><a class="toc-backref" href="#id9">BfsTraversal<a class="headerlink" href="#bfstraversal" title="Permalink to this headline">¶</a></a></h3>
+<p>BfsTraversal implements a well-known BFS (Breadth-First Search) algorithm to traverse through 2x2x2 states.</p>
+<p>It visits each state only once - so it will give you only one solution for each state. It guarantees, hovewer,
+it&#8217;s the shortest solution possible for the given state.</p>
+</div>
+</div>
 </div>
 
 
@@ -111,7 +256,18 @@ output.</dd></dl>
             <h3><a href="index.html">Table Of Contents</a></h3>
             <ul>
 <li><a class="reference external" href="">Traversal</a><ul>
-<li><a class="reference external" href="#traversal-objects">Traversal objects</a></li>
+<li><a class="reference external" href="#traversal-objects">Traversal objects</a><ul>
+<li><a class="reference external" href="#traversal-class">Traversal class</a></li>
+<li><a class="reference external" href="#examiner-class">Examiner class</a></li>
+<li><a class="reference external" href="#traversalcallback-class">TraversalCallback class</a></li>
+<li><a class="reference external" href="#sequence-class">Sequence class</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#stock-traversal-implementations">Stock traversal implementations</a><ul>
+<li><a class="reference external" href="#dfstraversal">DfsTraversal</a></li>
+<li><a class="reference external" href="#bfstraversal">BfsTraversal</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

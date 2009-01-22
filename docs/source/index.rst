@@ -19,6 +19,7 @@ situation in general.
 
    intro
    traversal
+   examples
    tips
 
 

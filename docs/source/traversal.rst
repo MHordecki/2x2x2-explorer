@@ -6,6 +6,10 @@ Traversal
 :Release: |release|
 :Date: |today|
 
+**Disclaimer:** In this manual, only methods that are meant to be used by end-user
+are documented. For a exhaustive list (when you're a developer, for example), refer to
+the source (which should be documented rather well).
+
 .. contents::
 
 -------------------
@@ -20,6 +24,10 @@ There are approximately 3,5 million of possible 2x2x2 situations. This space can
 in a reasonable time. 2x2x2 Explorer provides so-called traversal objects to visit them in certain
 order.
 
+=================
+Traversal class
+=================
+
 .. class:: Traversal
 
   Traversal class is an abstract base class from which every other traversal class inherits.
@@ -32,7 +40,7 @@ order.
     with the state provided by argument *state*. Some traversal implementations may ignore
     it, some may not.
 
-    Second parameter is an user-provided :class:`Examiner` object. :class:`Examiner` is an
+    Second parameter is a user-provided :class:`Examiner` object. :class:`Examiner` is an
     another abstract base class, acting as a functor object.
 
   .. method:: virtual void setVerbosity(bool verbosity);
@@ -40,5 +48,113 @@ order.
     It sets object's verbosity, i.e. whether it should process some debug output to the standard
     output.
 
+================
+Examiner class
+================
 
+.. class:: Examiner
 
+   Examiner is the next abstract base class, this time user-provided. It acts as a functor
+   object.
+
+   .. method:: virtual bool operator()(TraversalCallback &) = 0;
+
+     This is the method that Examiner implementations should expose. It will be called
+     in every iteration of traversal process, i.e. for every state visited. It can communicate
+     with it's caller through a TraversalCallback object (which is another abstract base class).
+
+=========================
+TraversalCallback class
+=========================
+
+.. class:: TraversalCallback
+
+  .. method:: virtual Cube getState() = 0;
+  
+    Returns a state being currently visited.
+
+  .. method:: virtual const Sequence &getSequence() = 0;
+
+    Returns a :class:`Sequence` object, which can be used to determine move sequence from the beginning state
+    of the traversal method.
+
+    .. note:: :func:`getSequence` can be quite expensive operation. Use it sparingly, as calling it for
+      every visited state can considerably slow your program.
+
+  .. method:: virtual const Move &getParentMove() = 0;
+
+    More of a raw power, it returns a :ctype:`Move` from which the current state was reached.
+
+================
+Sequence class
+================
+
+.. class:: Sequence
+
+  Sequence class encapsulates a move sequence.
+
+  .. method:: virtual int size() const;
+    
+    Pretty self-explanatory.
+
+    .. note:: This should not be used to determine the length of the actual algorithm that
+      is encapsulated by Sequence. Use :func:`getQtmMetric` for that, instead.
+
+  .. method:: virtual const Move &operator[](int index) const;
+
+    Also pretty self-explanatory.
+
+  .. method:: virtual int getQtmMetric() const;
+    
+    Returns an algorithm length in QTM(each move counts as one) metric.
+
+  .. method:: virtual int getHtmMetric() const;
+
+    Returns an algorithm length in HTM(double moves also count as one) metric.
+
+  .. method:: virtual std::string format() const;
+    
+    Returns a human-readable representation of the algorithm.
+
+---------------------------------
+Stock traversal implementations
+---------------------------------
+
+As for now, 2x2x2 Explorer provides two traversal methods (of course you can write
+your own, too!).
+
+==============
+DfsTraversal
+==============
+
+DfsTraversal uses a well-known DFS (Depth-First Search) algorithm to traverse through 2x2x2 states.
+
+It's a lot slower than it's counterpart, :class:`BfsTraversal`, but it visits states multiple times,
+each time with a *different* Sequence leading to it. It can be therefore used to generate
+many algorithms solving the same state.
+
+DfsTraversal needs one parameter to function - the recursion limit. It specifies how deep the
+algorithm will search, and it effectively means the maximal length of sequences returned.
+
+.. class:: DfsTraversal
+
+  .. method:: DfsTraversal(vector<pair<Move, Move> > &moves[, int limit = 0])
+    
+    This is a standard :func:`Traversal.Traversal` constructor with one optional parameter added (the recursion limit).
+
+  .. method:: virtual int getLimit();
+    
+    Returns the recursion limit.
+
+  .. method:: virtual void setLimit(int limit);
+
+    Sets the recursion limit.
+
+==============
+BfsTraversal
+==============
+
+BfsTraversal implements a well-known BFS (Breadth-First Search) algorithm to traverse through 2x2x2 states.
+
+It visits each state only once - so it will give you only one solution for each state. It guarantees, hovewer,
+it's the shortest solution possible for the given state.
