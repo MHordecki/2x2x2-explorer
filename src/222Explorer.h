@@ -17,7 +17,6 @@
 #include "TraversalCallback.h"
 #include "Examiner.h"
 
-#include "Interpreters.h"
 #include "Dfs.h"
 #include "Bfs.h"
 

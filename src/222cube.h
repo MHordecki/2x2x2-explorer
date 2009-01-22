@@ -39,19 +39,6 @@
  *
  */
 
-typedef struct
-{
-	uint64_t corners;
-} Cube;
-
-typedef Cube (*MovePtr)(const Cube&);
-struct Move
-{
-	MovePtr fun;
-	const char *name;
-	int index;
-};
-
 //Corner offsets
 #define UFR 0
 #define URB 5
@@ -66,59 +53,63 @@ struct Move
 // Cubies
 #define CUFR 0
 #define CURB 1
-#define CUBL 2
-#define CULF 3
+#define CUBL 3
+#define CULF 2
 
 #define CDRF 4
-#define CDFL 5
-#define CDLB 6
-#define CDBR 7
+#define CDFL 6
+#define CDLB 7
+#define CDBR 5
 
 //Orientations
 #define orientUD 0
 #define orientFB 1
 #define orientRL 2
 
-// Helper functions
+namespace Explorer
+{
+	class Cube
+	{
+		public:
+			uint64_t corners;
 
-//Trigger bit
-#define trig(x, y) (x) ^= (((uint64_t)1)<<(uint64_t)(y))
+			inline void set(int slot, uint64_t cubie, uint64_t orientation);
 
-//Read bit
-#define bitread(x, y) ((x) & (((uint64_t)1)<<((uint64_t)(y))))
+	};
 
-//Read corner orientation (check for 0/ check for 1/ check for 2)
-#define rOC2(x, y) ((x) & (1<<(y+1)))
-#define rOC1(x, y) ((x) & (1<<(y)))
-#define rOC0(x, y) (!(rOC1((x), (y)) | rOC2((x), (y))))
-#define rOC(x, y) (((x) & (3<<(y)))>>(y))
+	typedef Cube (*MovePtr)(const Cube&);
 
-// Some stuff
+	struct Move
+	{
+		MovePtr fun;
+		const char *name;
+		int index;
+	};
 
-#define corner_compose(cubie, orient) ((uint64_t) (((uint64_t)(cubie) << 2) | (orient)))
+	Cube cube_ideal();
 
-Cube cube_ideal();
+	bool operator==(const Cube &a, const Cube &b);
 
-bool operator==(const Cube &a, const Cube &b);
+	bool operator<(const Cube &a, const Cube &b);
 
-bool operator<(const Cube &a, const Cube &b);
+	Cube moveR(const Cube &state);
+	Cube moveRp(const Cube &state);
 
-Cube moveR(const Cube &state);
-Cube moveRp(const Cube &state);
+	Cube moveU(const Cube &state);
+	Cube moveUp(const Cube &state);
 
-Cube moveU(const Cube &state);
-Cube moveUp(const Cube &state);
+	Cube moveF(const Cube &state);
+	Cube moveFp(const Cube &state);
 
-Cube moveF(const Cube &state);
-Cube moveFp(const Cube &state);
+	Cube moveL(const Cube &state);
+	Cube moveLp(const Cube &state);
 
-Cube moveL(const Cube &state);
-Cube moveLp(const Cube &state);
+	Cube moveD(const Cube &state);
+	Cube moveDp(const Cube &state);
 
-Cube moveD(const Cube &state);
-Cube moveDp(const Cube &state);
+	Cube moveB(const Cube &state);
+	Cube moveBp(const Cube &state);
 
-Cube moveB(const Cube &state);
-Cube moveBp(const Cube &state);
+}
 
 #endif
