@@ -1,0 +1,260 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Fundamentals &mdash; 2x2x2 Explorer v0.3 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.3',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="2x2x2 Explorer v0.3 documentation" href="index.html" />
+    <link rel="next" title="Traversal" href="traversal.html" />
+    <link rel="prev" title="Welcome to 2x2x2 Explorer&#8217;s documentation!" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="traversal.html" title="Traversal"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to 2x2x2 Explorer&#8217;s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">2x2x2 Explorer v0.3 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  
+  <div class="section" id="fundamentals">
+<h1><a class="toc-backref" href="#id1">Fundamentals<a class="headerlink" href="#fundamentals" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Michal Hordecki</td>
+</tr>
+<tr class="field"><th class="field-name">Release:</th><td class="field-body">0.3</td>
+</tr>
+<tr class="field"><th class="field-name">Date:</th><td class="field-body">January 22, 2009</td>
+</tr>
+</tbody>
+</table>
+<p>2x2x2 Explorer is a programming library written in C++ language.
+Following assumptions are made:</p>
+<blockquote>
+<ul class="simple">
+<li>You can program in C++.</li>
+<li>You understand bit operations and bit arithmetic.</li>
+<li>You know basics of cube theory (cubies, orientations, and so on).</li>
+</ul>
+</blockquote>
+<p>This document will bring you the fundamentals of the Explorer.</p>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#fundamentals" id="id1">Fundamentals</a><ul>
+<li><a class="reference internal" href="#cube-state" id="id2">Cube state</a></li>
+<li><a class="reference internal" href="#moves" id="id3">Moves</a><ul>
+<li><a class="reference internal" href="#move-objects" id="id4">Move objects</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="cube-state">
+<h2><a class="toc-backref" href="#id2">Cube state<a class="headerlink" href="#cube-state" title="Permalink to this headline">¶</a></a></h2>
+<p>First thing to learn is how is a cube state represented in a memory.</p>
+<p>2x2x2 Explorer favors performance over beauty. Instead of using more human-friendly representation,
+such as array of cubies and their positions, which is fairly slow, Explorer represents a cube using
+single 64-bit integer value.</p>
+<p>Cube state consists of eight corners, each in it&#8217;s own, distinct position, and each having one of the
+three possible orientations.</p>
+<p>Instead of storing information about <em>where</em> certain cubie is positioned, Explorer stores information
+about <em>which</em> cubie is placed in certain positions. Each such chunk of information is composed of:</p>
+<blockquote>
+<ul class="simple">
+<li>Cubie index that is placed in given position (8 possibilities)</li>
+<li>Orientation of this piece (3 possibilities)</li>
+</ul>
+</blockquote>
+<p>Such chunk can be then stored in <strong>5 bits</strong> (3 bits for cubie, 2 bits for orientation). There are
+8 positions on the Pocket Cube. The whole cube can be stored, then, in 40 bits (which is really a
+64-bit long long due to alignment). First position is stored at position 0, second at 5, and so on
+(remember, we&#8217;re talking about bit positions there).</p>
+<p>Order in which positions are represented (excerpt from <tt class="docutils literal"><span class="pre">222cube.h</span></tt>):</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="c">//Corner offsets</span>
+<span class="cp">#define UFR 0</span>
+<span class="cp">#define URB 5</span>
+<span class="cp">#define UBL 10</span>
+<span class="cp">#define ULF 15</span>
+
+<span class="cp">#define DRF 20</span>
+<span class="cp">#define DFL 25</span>
+<span class="cp">#define DLB 30</span>
+<span class="cp">#define DBR 35</span>
+</pre></div>
+</div>
+<p>First two bits of each chunk is used for orientation, remaining three - for cubie index:</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="c">// Cubies</span>
+<span class="cp">#define CUFR 0</span>
+<span class="cp">#define CURB 1</span>
+<span class="cp">#define CUBL 3</span>
+<span class="cp">#define CULF 2</span>
+
+<span class="cp">#define CDRF 4</span>
+<span class="cp">#define CDFL 6</span>
+<span class="cp">#define CDLB 7</span>
+<span class="cp">#define CDBR 5</span>
+</pre></div>
+</div>
+<p>Note that cubie numbers can be consideredu at least awkward. There&#8217;s logic behind
+this, though. First bit set to 1 indicates that the cubie belongs to the B face
+(U face otherwise). Second bit indicates L face, and last one indicates whether
+the cubie belongs to D face.</p>
+<p>Orientation is represented in the following fashion:</p>
+<blockquote>
+<ul class="simple">
+<li>0 - top/bottom sticker is facing up/down.</li>
+<li>1 - top/bottom sticker is facing front/back.</li>
+<li>2 - top/bottom sticker is facing left/right.</li>
+</ul>
+</blockquote>
+<p>In 2x2x2 Explorer, declare cube state as <tt class="xref docutils literal"><span class="pre">Cube</span></tt> object. For historic reasons it&#8217;s implemented
+as <tt class="docutils literal"><span class="pre">int64_t</span></tt> packed in a C structure.</p>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt>Function <tt class="xref docutils literal"><span class="pre">Explorer.strip()</span></tt></dt>
+<dd>Prints cube state in human-readable format.</dd>
+<dt>Function <tt class="xref docutils literal"><span class="pre">Explorer.cube_ideal()</span></tt></dt>
+<dd>In order to get a representation for the solved state.</dd>
+<dt><tt class="xref docutils literal"><span class="pre">Explorer.bits</span></tt></dt>
+<dd>Various functions and macros that will help you in bit operations.</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="moves">
+<h2><a class="toc-backref" href="#id3">Moves<a class="headerlink" href="#moves" title="Permalink to this headline">¶</a></a></h2>
+<p>In order to change the cube state, some moves must be applied. 2x2x2 Explorer defines them as follows:</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">Cube</span> <span class="n">moveR</span><span class="p">(</span><span class="k">const</span> <span class="n">Cube</span> <span class="o">&amp;</span><span class="n">state</span><span class="p">);</span>
+<span class="n">Cube</span> <span class="n">moveRp</span><span class="p">(</span><span class="k">const</span> <span class="n">Cube</span> <span class="o">&amp;</span><span class="n">state</span><span class="p">);</span>
+
+<span class="n">Cube</span> <span class="n">moveU</span><span class="p">(</span><span class="k">const</span> <span class="n">Cube</span> <span class="o">&amp;</span><span class="n">state</span><span class="p">);</span>
+<span class="n">Cube</span> <span class="n">moveUp</span><span class="p">(</span><span class="k">const</span> <span class="n">Cube</span> <span class="o">&amp;</span><span class="n">state</span><span class="p">);</span>
+
+<span class="n">Cube</span> <span class="n">moveF</span><span class="p">(</span><span class="k">const</span> <span class="n">Cube</span> <span class="o">&amp;</span><span class="n">state</span><span class="p">);</span>
+<span class="n">Cube</span> <span class="n">moveFp</span><span class="p">(</span><span class="k">const</span> <span class="n">Cube</span> <span class="o">&amp;</span><span class="n">state</span><span class="p">);</span>
+
+<span class="n">Cube</span> <span class="n">moveL</span><span class="p">(</span><span class="k">const</span> <span class="n">Cube</span> <span class="o">&amp;</span><span class="n">state</span><span class="p">);</span>
+<span class="n">Cube</span> <span class="n">moveLp</span><span class="p">(</span><span class="k">const</span> <span class="n">Cube</span> <span class="o">&amp;</span><span class="n">state</span><span class="p">);</span>
+
+<span class="n">Cube</span> <span class="n">moveD</span><span class="p">(</span><span class="k">const</span> <span class="n">Cube</span> <span class="o">&amp;</span><span class="n">state</span><span class="p">);</span>
+<span class="n">Cube</span> <span class="n">moveDp</span><span class="p">(</span><span class="k">const</span> <span class="n">Cube</span> <span class="o">&amp;</span><span class="n">state</span><span class="p">);</span>
+
+<span class="n">Cube</span> <span class="n">moveB</span><span class="p">(</span><span class="k">const</span> <span class="n">Cube</span> <span class="o">&amp;</span><span class="n">state</span><span class="p">);</span>
+<span class="n">Cube</span> <span class="n">moveBp</span><span class="p">(</span><span class="k">const</span> <span class="n">Cube</span> <span class="o">&amp;</span><span class="n">state</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>As you can see, move methods don&#8217;t modify given cube state, but generate a new one instead.</p>
+<p>In practice, only {R, Rp, U, Up, F, Fp} are used. Why?</p>
+<p>Pocket Cube has no fixed centers. There are no &#8216;fixed&#8217; points that other pieces can be compared with.
+3x3x3 Cube, for example, has six fixed pieces - the centers (center stickers on each side). Such move
+sequence as <em>R L&#8217;</em> yields therefore a different cube state.</p>
+<p>In 2x2x2, hovewer, <em>R L&#8217;</em> does not change the state. It&#8217;s still the same.</p>
+<p>Given these circumstances, 2x2x2 Explorer &#8216;artificially&#8217; creates such a &#8216;fixed&#8217; point - the DBL cubie.
+Note that you can&#8217;t move this cubie with moves only from {R, Rp, U, Up, F, Fp}.</p>
+<p>Though not obvious at the first glance, every 2x2x2 case can be solved using only these moves, provided
+the DBL cubie is in it&#8217;s place, correctly oriented.</p>
+<div class="section" id="move-objects">
+<h3><a class="toc-backref" href="#id4">Move objects<a class="headerlink" href="#move-objects" title="Permalink to this headline">¶</a></a></h3>
+<p>Usually, there&#8217;s much more information associated with single move than only it&#8217;s function. In
+2x2x2 Explorer, every move is wrapped with an instance of Move class:</p>
+<dl class="class">
+<dt id="Move">
+<!--[Move]-->class <tt class="descname">Move</tt><a class="headerlink" href="#Move" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>You don&#8217;t have to instantiate Move objects directly - they&#8217;re defined in Explorer namespace.
+For every move function there is corresponding Move object with capitalized name (moveR -&gt; MoveR).</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="">Fundamentals</a><ul>
+<li><a class="reference external" href="#cube-state">Cube state</a></li>
+<li><a class="reference external" href="#moves">Moves</a><ul>
+<li><a class="reference external" href="#move-objects">Move objects</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="index.html" title="previous chapter">Welcome to 2x2x2 Explorer&#8217;s documentation!</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="traversal.html" title="next chapter">Traversal</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/intro.txt">Show Source</a></li>
+            </ul>
+          <h3>Quick search</h3>
+            <form class="search" action="search.html" method="get">
+              <input type="text" name="q" size="18" /> <input type="submit" value="Go" />
+              <input type="hidden" name="check_keywords" value="yes" />
+              <input type="hidden" name="area" value="default" />
+            </form>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="traversal.html" title="Traversal"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to 2x2x2 Explorer&#8217;s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">2x2x2 Explorer v0.3 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009, Michal Hordecki.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+</html>
