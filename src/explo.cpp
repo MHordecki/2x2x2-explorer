@@ -38,6 +38,7 @@ class MyExaminer: public Examiner
 
 		if(c == cube_ideal())
 		{
+			uint64_t maskN = ( (16LL << UFR) | (16LL << URB) | (16LL << UBL) | (16LL << ULF) | (31LL << DFL) | (31LL << DLB) | (31LL << DBR) | (31LL << DRF));
 			const Sequence &seq = cb.getSequence();
 
 			strip(c.corners);

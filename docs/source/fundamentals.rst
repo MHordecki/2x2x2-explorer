@@ -2,11 +2,11 @@
 Fundamentals
 **************
 
-.. _fundamentals:
-
 :Author: Michal Hordecki
 :Release: |release|
 :Date: |today|
+
+.. _fundamentals:
 
 2x2x2 Explorer is a programming library written in C++ language.
 Following assumptions are made:

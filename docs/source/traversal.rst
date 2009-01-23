@@ -6,6 +6,8 @@ Traversal
 :Release: |release|
 :Date: |today|
 
+.. _traversal:
+
 **Disclaimer:** In this manual, only methods that are meant to be used by end-user
 are documented. For a exhaustive list (when you're a developer, for example), refer to
 the source (which should be documented rather well).

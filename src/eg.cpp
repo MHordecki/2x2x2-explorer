@@ -39,7 +39,11 @@ class MyExaminer: public Examiner
 		Cube c = cb.getState();
 		uint64_t mask = ( (16LL << UFR) | (16LL << URB) | (16LL << UBL) | (16LL << ULF) | (31LL << DFL) | (31LL << DLB) | (31LL << DBR) | (31LL << DRF));
 
-		uint64_t goal = cube_ideal().corners;
+		Cube G = cube_ideal();
+		G.set(DFL, CDBR, orientUD);
+		G.set(DBR, CDFL, orientUD);
+
+		uint64_t goal = G.corners;
 
 
 		if((c.corners & mask) == ((goal & mask)))// | (orientFB << UFR) | (orientRL << URB) | (orientRL << ULF) ) )
