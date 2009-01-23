@@ -73,7 +73,7 @@ namespace Explorer
 		public:
 			uint64_t corners;
 
-			inline void set(int slot, uint64_t cubie, uint64_t orientation);
+			void set(int slot, uint64_t cubie, uint64_t orient);
 
 	};
 

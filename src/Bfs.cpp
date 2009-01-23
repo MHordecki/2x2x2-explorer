@@ -17,6 +17,7 @@ namespace Explorer
 
 		V.clear();
 		paths.clear();
+		std::cout << this->moves.size() << std::endl;
 
 		Q.push(make_pair(state.corners, make_pair(-1, -1)));
 

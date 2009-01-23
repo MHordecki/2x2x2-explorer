@@ -33,6 +33,8 @@ namespace Explorer
 			
 			virtual int getQtmMetric() const;
 			virtual int getHtmMetric() const;
+			
+			virtual vector<string> getFormattedVector() const;
 			virtual string format() const;
 	};
 }

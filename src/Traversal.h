@@ -3,7 +3,6 @@
 
 #include "222cube.h"
 #include "Examiner.h"
-
 #include <vector>
 
 namespace Explorer
@@ -29,6 +28,7 @@ namespace Explorer
 		public:
 			Traversal(std::vector<std::pair<Move, Move> > &_moves): cancellations(_moves.size() * 2, -1)
 			{
+				
 				for(std::vector<std::pair<Move, Move> >::iterator it = _moves.begin(); it != _moves.end(); ++it)
 				{
 					if(it->first.fun)
@@ -44,7 +44,6 @@ namespace Explorer
 						this->moves.back().index = this->moves.size() - 1;
 					}
 				}
-
 			}
 
 			/**

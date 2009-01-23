@@ -16,9 +16,6 @@ namespace Explorer
 	class DfsTraversal : public Traversal
 	{
 		protected:
-			vector<Move> moves;
-			vector<int> cancellations;
-
 			int limit;
 			int counter;
 

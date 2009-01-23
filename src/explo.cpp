@@ -1,9 +1,27 @@
 #include <iostream>
 #include <vector>
-#include "Explorer.h"
+#include "222Explorer.h"
 
 using namespace std;
 using namespace Explorer;
+
+void strip(uint64_t x)
+{
+	int i = 0;
+	while(x)
+	{
+		i++;
+		if(x&1)
+			cout <<"1";
+		else
+			cout <<"0";
+
+		if(i%5==0) cout << " | ";
+
+		x /= 2;
+	}
+	cout << endl;
+}
 
 /**
  * Our Examiner implementation.
@@ -22,6 +40,10 @@ class MyExaminer: public Examiner
 		{
 			const Sequence &seq = cb.getSequence();
 
+			strip(c.corners);
+			string seq.format();
+			vector<string> foo;
+			
 			cout << seq.format() << "(" << seq.getQtmMetric() << "q, " << seq.getHtmMetric() << "h)" << endl;
 		} 
 
@@ -36,17 +58,15 @@ int main()
 	init();
 
 	BfsTraversal bfs(getRUFMoves());
+	bfs.setVerbosity(true);
 
 	// Creating simple situation to solve
 	// Following line should work in a
 	//Cube st = executeAlgorithm(cube_ideal(), "U' L' U2 L U L' U L R U2 R' U' R U' R' U"); <- 2x2x2 Explorer 1.0 ;)
 	
 	Cube st = cube_ideal();
-	st.corners &= ~(32LL << URB);
-	st.corners |= corner_compose(CURB, orientRL) << URB;
-
-	st.corners &= ~(32LL << UBL);
-	st.corners |= corner_compose(CUBL, orientRL) << UBL;
+	st.set(URB, CURB, orientRL);
+	st.set(UBL, CUBL, orientRL);
 
 	MyExaminer myexaminer;
 	

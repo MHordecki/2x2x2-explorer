@@ -3,6 +3,12 @@
 
 namespace Explorer
 {
+	Move MoveR, MoveRp;
+	Move MoveU, MoveUp;
+	Move MoveF, MoveFp;
+	Move MoveL, MoveLp;
+	Move MoveD, MoveDp;
+	Move MoveB, MoveBp;
 	std::vector<std::pair<Move, Move> > RUFMoves;
 
 	void init()

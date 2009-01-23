@@ -13,12 +13,12 @@
 
 namespace Explorer
 {
-	Move MoveR, MoveRp;
-	Move MoveU, MoveUp;
-	Move MoveF, MoveFp;
-	Move MoveL, MoveLp;
-	Move MoveD, MoveDp;
-	Move MoveB, MoveBp;
+	extern Move MoveR, MoveRp;
+	extern Move MoveU, MoveUp;
+	extern Move MoveF, MoveFp;
+	extern Move MoveL, MoveLp;
+	extern Move MoveD, MoveDp;
+	extern Move MoveB, MoveBp;
 
 	void init();
 
