@@ -62,9 +62,9 @@
 #define CDBR 5
 
 //Orientations
-#define orientUD 0
-#define orientFB 1
-#define orientRL 2
+#define orientUD 0LL
+#define orientFB 1LL
+#define orientRL 2LL
 
 namespace Explorer
 {
