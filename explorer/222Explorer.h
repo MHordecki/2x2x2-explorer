@@ -13,11 +13,12 @@
 
 #include "Core.h"
 
-#include "Traversal.h"
-#include "TraversalCallback.h"
+#include "Traversal/TraversalCallback.h"
 #include "Examiner.h"
 
-#include "Dfs.h"
-#include "Bfs.h"
+#include "Traversal/Dfs.h"
+#include "Traversal/Bfs.h"
+
+#include "Mask.h"
 
 #endif

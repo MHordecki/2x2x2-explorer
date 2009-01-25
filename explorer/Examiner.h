@@ -1,7 +1,7 @@
 #ifndef _EXAMINER_H
 #define _EXAMINER_H
 
-#include "TraversalCallback.h"
+#include "Traversal/TraversalCallback.h"
 
 namespace Explorer
 {
