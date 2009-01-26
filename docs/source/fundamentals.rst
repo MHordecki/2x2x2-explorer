@@ -1,10 +1,8 @@
-**************
-Fundamentals
-**************
+************************************
+Fundamentals of the 2x2x2 Explorer
+************************************
 
 :Author: Michal Hordecki
-:Release: |release|
-:Date: |today|
 
 .. _fundamentals:
 
@@ -89,19 +87,19 @@ They are represented by the following macros::
   #define orientRL 2
 
 
-In 2x2x2 Explorer, declare cube state as :ctype:`Cube` object. For historic reasons it's implemented
+In 2x2x2 Explorer, declare cube state as ``Cube`` object. For historic reasons it's implemented
 as ``int64_t`` packed in C structure.
 
-.. seealso::
+=================
+Further reading
+=================
 
-  Function :func:`Explorer.strip`
-    Prints cube state in human-readable format.
-
-  Function :func:`Explorer.cube_ideal`
+Cube::strip()
+   Prints cube state in human-readable format.
+Explorer::cube_ideal()
     In order to get a representation for the solved state.
-  
-  Class :mod:`Explorer.Mask`
-    Bit operations in easy-to-use object.
+Explorer::Mask
+    Bit operations in easy-to-use, object fashion.
 
 -------
 Moves
@@ -148,17 +146,7 @@ Move objects
 ==============
 
 Usually, there's much more information associated with single move than only it's function. In 
-2x2x2 Explorer, every move is wrapped with an instance of Move class:
-
-.. class:: Move
-
-  .. attribute:: MovePtr fun
-    
-    Pointer to the move function.
-
-  .. attribute:: const char \*name
-    
-    String literal, containg a human-readable name of the move.
+2x2x2 Explorer, every move is wrapped with an instance of Move class.
 
 You don't have to instantiate Move objects directly - they're defined in Explorer namespace.
 For every move function there is corresponding Move object with capitalized name (moveR -> MoveR).

@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.5: http://docutils.sourceforge.net/" />
+<title>Fundamentals of the 2x2x2 Explorer</title>
+<meta name="author" content="Michal Hordecki" />
+<style type="text/css">
+
+/********************************************************************
+ *  CSS style for reStructuredText HTML output
+ *  by Cezary Sobaniec <Cezary.Sobaniec@put.edu.pl>
+ *
+ *  $Id: rst.css,v 1.10 2008/05/06 14:49:48 sobaniec Exp $
+ ********************************************************************/
+
+body  {
+  margin: 0pt;
+  margin-bottom: 2ex;
+  padding: 0ex 1em;
+  color: #000000;
+  background-color: #F4F4F4;
+  font-family: "Trebuchet MS", "Tahoma", "Verdana", sans-serif;
+  font-size: 15.5px;
+  line-height: 1.5em;
+}
+div.document {
+  background-color: white;
+  padding: 1ex 1em;
+  margin: 0ex auto;
+  max-width: 45em;
+  min-width: 15em;
+}
+p {
+  margin: 0ex 0em;
+  padding: 0ex 0em;
+  text-indent: 1.5em;
+}
+ul p, ol p, dl p,
+h1+p, h2+p, h3+p, pre+p, dl+p, blockquote+p, ul+p, ol+p, dl+p,
+blockquote p:first-child, table+p, div.sidebar p, p.caption,
+table.footnote p.first, p.topic-title, img.align-left+p,
+h1+img.align-right+p, h2+img.align-right+p,
+h1+div+p, h2+div+p,
+h1+a.image-reference+p, h2+a.image-reference+p,
+div.abstract p
+{
+  text-indent: 0em;
+}
+ol p, ul p, dl p, table.footnote p {
+  margin: 0.5ex 0em;
+}
+blockquote {
+  margin: 2ex 2em;
+  margin-right: 0em;
+}
+ul blockquote, ol blockquote, dl blockquote {
+  margin-left: 1.5em;
+}
+p.attribution {
+  margin-top: -0.5ex;
+  text-align: right;
+}
+/* small paragraphs */
+div.abstract p, div.sidebar p, p.caption, table.footnote td,
+div.legend, table.docutils[border="1"] {
+  font-size: 92%;
+  line-height: 115%;
+}
+a { text-decoration: none }
+a:link  { color: #A00000; }
+a:active { color: #FF0000; }
+a:visited { color: #A00000; }
+a[href]:hover {
+  text-decoration: underline;
+  color: #FF0000
+}
+a.toc-backref {
+  color: inherit;
+}
+
+/* sidebar */
+div.sidebar {
+  border: 2px solid #CCC;
+  background-color: #F8F8F8;
+  padding: 0.7ex 0.5em;
+  width: 30%;
+  float: right;
+  margin-left: 1em;
+  margin-top: 0.5ex;
+  margin-bottom: 0.5ex;
+  color: #440;
+}
+p.sidebar-title {
+  font-weight: bold;
+}
+
+/* headings */
+h1, h2, h3, h4 {
+  font-weight: normal;
+}
+h1, div.contents p.topic-title {
+  font-size: 160%;
+  line-height: 125%;
+  margin-top: 1.5ex;
+  margin-bottom: 1ex;
+}
+h1.title {
+  font-size: 210%;
+  font-weight: normal;
+  text-align: center;
+  color: inherit;
+  margin-bottom: 0.3ex;
+}
+h2 {
+  font-size: 130%;
+  line-height: 110%;
+  margin-top: 1.7ex;
+  margin-bottom: 1ex;
+  padding-bottom: 0ex;
+  color: inherit;
+}
+h2.subtitle {
+  margin-top: 1ex;
+  font-size: 140%;
+  text-align: center;
+}
+h3 {
+  font-size: 100%;
+  font-weight: bold;
+  margin-top: 0.7ex;
+  margin-bottom: 0.3ex;
+}
+h1.title + *, h2.subtitle + *, table.docinfo + *, div.abstract + * {
+  margin-top: 10ex;
+}
+h2.subtitle {
+  margin-top: 0.5ex;
+}
+
+table.docinfo {
+  margin: 1.5ex auto;
+  padding: 0pt;
+}
+th.docinfo-name {
+  text-align: left;
+  padding-right: 0.3em;
+}
+
+div.abstract {
+  min-width: 17em;
+  max-width: 28em;
+  margin: 2ex auto;
+}
+div.abstract p.topic-title {
+  text-align: center;
+  font-weight: bold;
+}
+div.abstract p {
+  margin: 0.7ex 0em;
+}
+
+/* lists */
+pre, code, tt, span.pre {
+  font-family: "Andale Mono", "Lucida Console", "Monaco", monospace;
+  color: #000040;
+}
+span.pre {
+  font-size: 97%;
+}
+pre {
+  white-space: pre;
+  line-height: 120%;
+  margin: 2ex 2.22em;		/*   2.22 = 2 * 10/9   */
+  margin-right: 0em;
+  font-size: 90%;
+}
+ul pre, ol pre, dl pre {
+  margin-left: 1.67em;		/*   1.67 = 1.5 * 10/9  */
+}
+ul, ol, dl {
+  padding-top: 0ex;
+  padding-bottom: 0ex;
+  margin-top: 0ex;
+  margin-bottom: 0ex;
+  margin-left: 0pt;
+}
+ul, ol {
+  padding-left: 2.5em;
+}
+ul ul, ol ul, ol ol, ul ol {
+  padding-left: 1.6em;
+  margin-top: 0.4ex;
+  margin-bottom: 0.4ex;
+}
+ol ol {
+  list-style-type: lower-alpha;
+}
+li {
+  padding: 0pt;
+  margin: 1.2ex 0em;
+}
+li li {
+  padding: 0pt;
+  margin: 1ex 0em;
+}
+
+/* nested numbered lists */
+ol ol {
+  padding-left: 0em;
+  counter-reset: nitem;
+}
+ol ol li {
+  list-style-type: none;
+  counter-increment: nitem;
+}
+ol ol li p {
+  margin-left: 1.6em;
+}
+ol ol li p.first {
+  text-indent: -1.2em;
+}
+ol ol li p.first:before {
+  display: inline;
+  content: counter(nitem, lower-alpha) ") ";
+}
+
+dt {
+  margin-top: 1.2ex;
+}
+dl {
+  margin-bottom: 1.5ex;
+}
+dd {
+  margin-top: 0.3ex;
+  margin-left: 2.5em;
+}
+ul.auto-toc {
+  list-style-type: none;
+}
+ul.auto-toc ul.auto-toc {
+  padding-left: 1.5em;
+}
+ul.auto-toc ul.auto-toc ul.auto-toc {
+  padding-left: 2.5em;
+}
+
+/* images */
+img {
+  margin: 1ex auto;
+  border: none;
+}
+img.align-right {
+  margin-top: 0.5ex;
+  margin-bottom: 0.5ex;
+  margin-left: 1em;
+}
+img.align-left {
+  margin-top: 0.5ex;
+  margin-bottom: 0.5ex;
+  margin-right: 1em;
+}
+
+/* figures */
+div.figure[align=left] {
+  float: left;
+  margin-right: 1em;
+  margin-top: 0.4ex;
+  margin-bottom: 0.1ex;
+}
+div.figure[align=right] {
+  float: right;
+  margin-left: 1em;
+  margin-top: 0.4ex;
+  margin-bottom: 0.1ex;
+}
+div.figure[align=center] {
+  margin: 2.5ex auto;
+}
+p.caption {
+  text-align: center;
+  max-width: 100%;
+  color: #000070;
+}
+div.figure[align=center] p.caption {
+  max-width: 70%;
+}
+
+/* footnotes & biblio */
+table.footnote td.label {
+  padding-right: 0.5em;
+  text-align: right;
+}
+table.footnote col.label {
+  width: 2.5em;
+}
+table.footnote p.first {
+  margin-top: 0ex;
+}
+table.citation, table.citation + * {
+  margin-top: 1.2ex;
+}
+table.citation col.label {
+  width: 6em;
+}
+table.citation + table.citation {
+  margin-top: 0.2ex;
+  margin-bottom: 0.2ex;
+}
+
+/* tables */
+table.docutils {
+  border-spacing: 0;
+}
+table.docutils[border="1"] {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  empty-cells: show;
+  margin: 2ex auto;
+}
+table.docutils[border="1"] td, table.docutils[border="1"] th {
+  border: 1px solid #AAA;
+  padding: 0.2ex 0.2em;
+}
+caption {
+  margin: 2ex auto;
+  margin-bottom: -0.5ex;
+  color: #000060;
+  max-width: 70%;
+}
+
+
+/* other */
+hr {
+  border: none;
+  height: 1px;
+  background-color: #A08080;
+  margin: 2ex 0em;
+}
+div.line br {
+  line-height: 70%;
+}
+div.contents li {
+  margin-top: 0.5ex;
+  margin-bottom: 0.5ex;
+}
+div.contents li li, div.contents p {
+  margin-top: 0ex;
+  margin-bottom: 0ex;
+}
+
+/* printing */
+@media print {
+  body {
+    color: #000000;
+    font-size: 11pt;
+    line-height: 120%;
+    margin: 0ex 0em;
+    background: none;
+    padding: 0pt;
+  }
+  div.document {
+    padding: 0ex 0em;
+    margin: 0ex 0ex;
+    width: 100%;
+  }
+  pre, code, span.pre, span.date {
+    color: black;
+  }
+  h1, h2, h3, h4, code, a:link, a:visited, span.type, blockquote {
+    color: black;
+  }
+  pre {
+    background-color: white;
+  }
+  div.sidebar {
+    border: 2px solid #CCC;
+    background-color: white;
+    color: black;
+  }
+}
+
+div.footer
+{
+	font-size: 0.8em;
+	color: #666;
+}
+
+
+</style>
+</head>
+<body>
+<div class="document" id="fundamentals-of-the-2x2x2-explorer">
+<h1 class="title">Fundamentals of the 2x2x2 Explorer</h1>
+<table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr><th class="docinfo-name">Author:</th>
+<td>Michal Hordecki</td></tr>
+</tbody>
+</table>
+<p id="fundamentals">2x2x2 Explorer is a programming library written in C++ language.
+Following assumptions are made:</p>
+<blockquote>
+<ul class="simple">
+<li>You can program in C++.</li>
+<li>You understand bit operations and bit arithmetic.</li>
+<li>You know basics of cube theory (cubies, orientations, and so on).</li>
+</ul>
+</blockquote>
+<p>This document will bring you the fundamentals of the Explorer.</p>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#cube-state" id="id1">Cube state</a><ul>
+<li><a class="reference internal" href="#further-reading" id="id2">Further reading</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#moves" id="id3">Moves</a><ul>
+<li><a class="reference internal" href="#move-objects" id="id4">Move objects</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="cube-state">
+<h1><a class="toc-backref" href="#id1">Cube state</a></h1>
+<p>First thing to learn is how is a cube state represented in a memory.</p>
+<p>2x2x2 Explorer favors performance over beauty. Instead of using more human-friendly representation,
+such as array of cubies and their positions, which is fairly slow, Explorer represents a cube using
+single 64-bit integer value.</p>
+<p>Cube state consists of eight corners, each in it's own, distinct position, and each having one of the
+three possible orientations.</p>
+<p>Instead of storing information about <em>where</em> certain cubie is positioned, Explorer stores information
+about <em>which</em> cubie is placed in certain positions. Each such chunk of information is composed of:</p>
+<blockquote>
+<ul class="simple">
+<li>Cubie index that is placed in given position (8 possibilities)</li>
+<li>Orientation of this piece (3 possibilities)</li>
+</ul>
+</blockquote>
+<p>Such chunk can be then stored in <strong>5 bits</strong> (3 bits for cubie, 2 bits for orientation). There are
+8 positions on the Pocket Cube. The whole cube can be stored, then, in 40 bits (which is really a
+64-bit long long due to alignment). First position is stored at position 0, second at 5, and so on
+(remember, we're talking about bit positions there).</p>
+<p>Order in which positions are represented (excerpt from <tt class="docutils literal"><span class="pre">222cube.h</span></tt>):</p>
+<pre class="literal-block">
+//Corner offsets
+#define UFR 0
+#define URB 5
+#define UBL 10
+#define ULF 15
+
+#define DRF 20
+#define DFL 25
+#define DLB 30
+#define DBR 35
+</pre>
+<p>First two bits of each chunk is used for orientation, remaining three - for cubie index:</p>
+<pre class="literal-block">
+// Cubies
+#define CUFR 0
+#define CURB 1
+#define CUBL 3
+#define CULF 2
+
+#define CDRF 4
+#define CDFL 6
+#define CDLB 7
+#define CDBR 5
+</pre>
+<p>Note that cubie numbers can be consideredu at least awkward. There's logic behind
+this, though. First bit set to 1 indicates that the cubie belongs to the B face
+(U face otherwise). Second bit indicates L face, and last one indicates whether
+the cubie belongs to D face.</p>
+<p>Orientation is represented in the following fashion:</p>
+<blockquote>
+<ul class="simple">
+<li>0 - top/bottom sticker is facing up/down.</li>
+<li>1 - top/bottom sticker is facing front/back.</li>
+<li>2 - top/bottom sticker is facing left/right.</li>
+</ul>
+</blockquote>
+<p>They are represented by the following macros:</p>
+<pre class="literal-block">
+//Orientations
+#define orientUD 0
+#define orientFB 1
+#define orientRL 2
+</pre>
+<p>In 2x2x2 Explorer, declare cube state as <tt class="docutils literal"><span class="pre">Cube</span></tt> object. For historic reasons it's implemented
+as <tt class="docutils literal"><span class="pre">int64_t</span></tt> packed in C structure.</p>
+<div class="section" id="further-reading">
+<h2><a class="toc-backref" href="#id2">Further reading</a></h2>
+<dl class="docutils">
+<dt>Cube::strip()</dt>
+<dd>Prints cube state in human-readable format.</dd>
+<dt>Explorer::cube_ideal()</dt>
+<dd>In order to get a representation for the solved state.</dd>
+<dt>Explorer::Mask</dt>
+<dd>Bit operations in easy-to-use, object fashion.</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="moves">
+<h1><a class="toc-backref" href="#id3">Moves</a></h1>
+<p>In order to change the cube state, some moves must be applied. 2x2x2 Explorer defines them as follows:</p>
+<pre class="literal-block">
+Cube moveR(const Cube &amp;state);
+Cube moveRp(const Cube &amp;state);
+
+Cube moveU(const Cube &amp;state);
+Cube moveUp(const Cube &amp;state);
+
+Cube moveF(const Cube &amp;state);
+Cube moveFp(const Cube &amp;state);
+
+Cube moveL(const Cube &amp;state);
+Cube moveLp(const Cube &amp;state);
+
+Cube moveD(const Cube &amp;state);
+Cube moveDp(const Cube &amp;state);
+
+Cube moveB(const Cube &amp;state);
+Cube moveBp(const Cube &amp;state);
+</pre>
+<p>As you can see, move methods don't modify given cube state, but generate a new one instead.</p>
+<p>In practice, only {R, Rp, U, Up, F, Fp} are used. Why?</p>
+<p>Pocket Cube has no fixed centers. There are no 'fixed' points that other pieces can be compared with.
+3x3x3 Cube, for example, has six fixed pieces - the centers (center stickers on each side). Such move
+sequence as <em>R L'</em> yields therefore a different cube state.</p>
+<p>In 2x2x2, hovewer, <em>R L'</em> does not change the state. It's still the same.</p>
+<p>Given these circumstances, 2x2x2 Explorer 'artificially' creates such a 'fixed' point - the DBL cubie.
+Note that you can't move this cubie with moves only from {R, Rp, U, Up, F, Fp}.</p>
+<p>Though not obvious at the first glance, every 2x2x2 case can be solved using only these moves, provided
+the DBL cubie is in it's place, correctly oriented.</p>
+<div class="section" id="move-objects">
+<h2><a class="toc-backref" href="#id4">Move objects</a></h2>
+<p>Usually, there's much more information associated with single move than only it's function. In
+2x2x2 Explorer, every move is wrapped with an instance of Move class.</p>
+<p>You don't have to instantiate Move objects directly - they're defined in Explorer namespace.
+For every move function there is corresponding Move object with capitalized name (moveR -&gt; MoveR).</p>
+</div>
+</div>
+</div>
+</body>
+</html>
