@@ -51,7 +51,7 @@ namespace Explorer
 		RUFMoves.push_back(std::make_pair(MoveF, MoveFp));
 	}
 
-	std::vector<std::pair<Move, Move> > &getRUFMoves()
+	const std::vector<std::pair<Move, Move> > &getRUFMoves()
 	{
 		return RUFMoves;
 	}

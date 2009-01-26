@@ -30,7 +30,7 @@ namespace Explorer
 			int allcount;
 
 		public:
-			BfsTraversal(vector<pair<Move, Move> > &_moves):  Traversal(_moves), V(4000000)
+			BfsTraversal(const vector<pair<Move, Move> > &_moves):  Traversal(_moves), V(4000000)
 			{
 				paths.reserve(4000000);
 			}

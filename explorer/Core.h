@@ -22,7 +22,7 @@ namespace Explorer
 
 	void init();
 
-	std::vector<std::pair<Move, Move> > &getRUFMoves();
+	const std::vector<std::pair<Move, Move> > &getRUFMoves();
 
 	void strip(uint64_t);
 	void strip(Cube &);

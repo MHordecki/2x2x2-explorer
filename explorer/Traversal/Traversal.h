@@ -26,10 +26,10 @@ namespace Explorer
 			std::vector<int> cancellations;
 
 		public:
-			Traversal(std::vector<std::pair<Move, Move> > &_moves): cancellations(_moves.size() * 2, -1)
+			Traversal(const std::vector<std::pair<Move, Move> > &_moves): cancellations(_moves.size() * 2, -1)
 			{
 				
-				for(std::vector<std::pair<Move, Move> >::iterator it = _moves.begin(); it != _moves.end(); ++it)
+				for(std::vector<std::pair<Move, Move> >::const_iterator it = _moves.begin(); it != _moves.end(); ++it)
 				{
 					if(it->first.fun)
 					{

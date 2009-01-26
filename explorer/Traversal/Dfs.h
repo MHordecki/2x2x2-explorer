@@ -22,7 +22,7 @@ namespace Explorer
 			void search(Examiner &examiner, Cube state, Sequence &seq, int, int, int, int);
 
 		public:
-			DfsTraversal(vector<pair<Move, Move> > &_moves, int _limit = 0): Traversal(_moves), limit(_limit)
+			DfsTraversal(const vector<pair<Move, Move> > &_moves, int _limit = 0): Traversal(_moves), limit(_limit)
 			{
 			}
 
