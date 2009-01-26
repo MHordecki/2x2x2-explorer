@@ -81,6 +81,14 @@ Orientation is represented in the following fashion:
   + 1 - top/bottom sticker is facing front/back.
   + 2 - top/bottom sticker is facing left/right.
 
+They are represented by the following macros::
+
+  //Orientations
+  #define orientUD 0
+  #define orientFB 1
+  #define orientRL 2
+
+
 In 2x2x2 Explorer, declare cube state as :ctype:`Cube` object. For historic reasons it's implemented
 as ``int64_t`` packed in C structure.
 

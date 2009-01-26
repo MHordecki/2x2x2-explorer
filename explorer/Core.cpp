@@ -56,27 +56,5 @@ namespace Explorer
 		return RUFMoves;
 	}
 
-	void strip(uint64_t x)
-	{
-		int i = 0;
-		while(x)
-		{
-			i++;
-			if(x&1)
-				cout <<"1";
-			else
-				cout <<"0";
-
-			if(i%5==0) cout << " | ";
-
-			x /= 2;
-		}
-		cout << endl;
-	}
-
-	void strip(Cube &c)
-	{
-		strip(c.corners);
-	}
 
 }

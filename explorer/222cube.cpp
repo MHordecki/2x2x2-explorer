@@ -1,11 +1,34 @@
 
 #include "222cube.h"
 
+#include <iostream>
+using std::cout;
+using std::endl;
+
 namespace Explorer
 {
 	void Cube::set(int slot, uint64_t cubie, uint64_t orient)
 	{
 		corners = (corners & ~(31LL << slot)) | (cubie << (slot+2) ) | (orient << slot);
+	}
+
+	void Cube::strip()
+	{
+		int i = 0;
+		uint64_t x = corners;
+		while(x)
+		{
+			i++;
+			if(x&1)
+				cout <<"1";
+			else
+				cout <<"0";
+
+			if(i%5==0) cout << " | ";
+
+			x /= 2;
+		}
+		cout << endl;
 	}
 
 	Cube cube_ideal()

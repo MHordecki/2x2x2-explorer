@@ -68,21 +68,53 @@
 
 namespace Explorer
 {
+	/**
+	 * Representation of a single cube state. Refer to
+	 * the Manual for more.
+	 */
 	class Cube
 	{
 		public:
 			uint64_t corners;
 
+			/**
+			 * Sets a single position. Use it unless
+			 * you want to mess with bit operations.
+			 * 
+			 * @param slot Position to be set.
+			 * @param cubie Cubie on this position.
+			 * @param orient Orientation of the cube.
+			 *
+			 * @see Explorer::Mask
+			 */
+
 			void set(int slot, uint64_t cubie, uint64_t orient);
+
+
+			/**
+			 * Prints single bits of a state to the standard output.
+			 * Bits are printed in little endian format (i.e. the least
+			 * important bit comes first).
+			 */
+			void strip();
 
 	};
 
 	typedef Cube (*MovePtr)(const Cube&);
 
+	/**
+	 * A structure that wraps move functions, providing
+	 * useful informations.
+	 */
 	struct Move
 	{
+		/// Function pointer.
 		MovePtr fun;
+
+		// Name of the move.
 		const char *name;
+
+		// Internal use
 		int index;
 	};
 

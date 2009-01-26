@@ -4,13 +4,6 @@
 #include <vector>
 #include "222cube.h"
 
-#define MASK_R 1
-#define MASK_U 2
-#define MASK_F 4
-#define MASK_L 8
-#define MASK_D 16
-#define MASK_B 32
-
 namespace Explorer
 {
 	extern Move MoveR, MoveRp;
@@ -20,12 +13,19 @@ namespace Explorer
 	extern Move MoveD, MoveDp;
 	extern Move MoveB, MoveBp;
 
+	/**
+	 * Inits the 2x2x2 Explorer.
+	 *
+	 * @warning Call this before any other call to the 2x2x2
+	 * Explorer.
+	 */
 	void init();
 
+	/**
+	 * Returns a pre-build vector of six moves (R, R', U, U', F, F'). Useful
+	 * for passing it straight into traversal objects.
+	 */
 	const std::vector<std::pair<Move, Move> > &getRUFMoves();
-
-	void strip(uint64_t);
-	void strip(Cube &);
 
 }
 #endif
